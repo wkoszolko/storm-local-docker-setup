@@ -1,0 +1,55 @@
+version: '3.1'
+
+services:
+    zookeeper:
+        image: zookeeper:3.4
+        container_name: zookeeper
+        restart: always
+
+    nimbus:
+        image: storm:2.2.0
+        container_name: nimbus
+        command: storm nimbus
+        depends_on:
+            - zookeeper
+        links:
+            - zookeeper
+        restart: always
+        ports:
+            - 6627:6627
+
+    supervisor:
+        image: storm:2.2.0
+        container_name: supervisor
+        command: storm supervisor
+        depends_on:
+            - nimbus
+            - zookeeper
+        links:
+            - nimbus
+            - zookeeper
+        restart: always
+
+    ui:
+        image: storm:2.2.0
+        container_name: ui
+        command: storm ui
+        depends_on:
+            - nimbus
+        links:
+            - nimbus
+        restart: always
+        ports:
+            - 8080:8080
+
+    storm-delpoy-topology:
+        image: storm:2.2.0
+        container_name: storm-delpoy-topology
+        command: /topology-deployment-scripts/deploy-topology.sh
+        depends_on:
+            - nimbus
+        links:
+            - nimbus
+        volumes:
+            - ./topology-deployment-scripts:/topology-deployment-scripts
+            - ./target:/topology
