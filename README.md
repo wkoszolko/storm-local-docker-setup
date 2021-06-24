@@ -1,6 +1,6 @@
 # storm-local-development-setup
 
-Example how to develop storm locally without installing storm on your computer.
+Example of developing Apache Storm topologies locally without installing storm on your computer.
 
 This repository covers simple Storm 2 topology (WordCount) and docker-compose file which is responsible for running Storm Cluster, Storm UI, and container for deploying topology.
 
@@ -24,6 +24,7 @@ docker-compose up --build --force-recreate
 If something doesn't work, you can remove images and try again:
 ```shell script
 docker-compose rm -f
+docker-compose up --build --force-recreate
 ```
 
 ## Notes
