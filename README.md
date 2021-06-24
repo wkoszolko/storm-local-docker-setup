@@ -2,7 +2,7 @@
 
 Example of developing Apache Storm topologies locally without installing storm on your computer.
 
-This repository covers simple Storm 2 topology (WordCount) and docker-compose file which is responsible for running Storm Cluster, Storm UI, and container for deploying topology.
+This repository covers simple Apache Storm 2 topology (WordCount) and docker-compose file which is responsible for running Storm Cluster, Storm UI, and container for deploying topology.
 
 ## Quick Start
 You have to build the project (WordkCount topology):
